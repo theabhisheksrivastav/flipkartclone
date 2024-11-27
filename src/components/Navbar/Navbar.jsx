@@ -22,15 +22,19 @@ function Navbar() {
         </div>
 
         <div className="flex items-center">
-          <button onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Login</button>
-          {isDropdownOpen && (
-            <Popup items={["Sign Up", "My Profile", "Flipkart Plus Zone", "Orders", "Wishlist", "Rewards"]}/>
-          )}
+          <div onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown} className="relative">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Login</button>
+            {isDropdownOpen && (
+              <Popup items={["Sign Up", "My Profile", "Flipkart Plus Zone", "Orders", "Wishlist", "Rewards"]}/>
+            )}
+          </div>
           <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Become a Seller</button>
-          <button onMouseEnter={toggleMoreDropdown} onMouseLeave={toggleMoreDropdown} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">More</button>
-          {isMoreDropdownOpen && (
-             <Popup items={["Notification Preference", "24/7 Support", "Advertise", "Download App"]}/>
-          )}
+          <div onMouseEnter={toggleMoreDropdown} onMouseLeave={toggleMoreDropdown} className="relative">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">More</button>
+            {isMoreDropdownOpen && (
+              <Popup items={["Notification Preference", "24/7 Support", "Advertise", "Download App"]}/>
+            )}
+          </div>
           <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cart</button>
         </div>
       </div>
