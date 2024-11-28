@@ -1,42 +1,45 @@
 import { useState } from 'react';
 import Popup from './Popup';
+import LoginDropdown from './LoginDropdown';
+import SearchBar from './SearchBar';
+import { FaCartArrowDown, FaEllipsisV, FaStoreAlt } from 'react-icons/fa';
 
 function Navbar() {
 
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleMoreDropdown = () => {
     setIsMoreDropdownOpen(!isMoreDropdownOpen);
   };
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  }
   return (
-    <nav className="bg-blue-500 text-white p-4">
+    <nav className="bg-white text-black p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
-          <img src="/path/to/flipkart-logo.png" alt="Flipkart Logo" className="w-20 h-8" />
-          <input type="text" placeholder="Search for products, brands and more" className="w-80 h-10 border border-gray-300 rounded-md pl-4 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Search</button>
-        </div>
 
         <div className="flex items-center">
-          <div onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown} className="relative">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Login</button>
-            {isDropdownOpen && (
-              <Popup items={["Sign Up", "My Profile", "Flipkart Plus Zone", "Orders", "Wishlist", "Rewards"]}/>
-            )}
-          </div>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Become a Seller</button>
-          <div onMouseEnter={toggleMoreDropdown} onMouseLeave={toggleMoreDropdown} className="relative">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">More</button>
-            {isMoreDropdownOpen && (
-              <Popup items={["Notification Preference", "24/7 Support", "Advertise", "Download App"]}/>
-            )}
-          </div>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cart</button>
+          <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/fkheaderlogo_exploreplus-44005d.svg" alt="Flipkart Logo" className="w-56 h-24" />
         </div>
+
+        <SearchBar />
+
+        <div className="flex items-center text-2xl font-normal pl-10">
+
+          <LoginDropdown />
+
+          <button className="flex items-center gap-2  text-2xl font-semibold  focus:outline-none bg-white text-black py-2 px-4 rounded"> <FaCartArrowDown /> Cart</button>
+
+          <button className="flex items-center gap-2  text-2xl font-semibold  focus:outline-none bg-white text-black py-2 px-4 rounded mr-4"><FaStoreAlt /> Become a Seller</button>
+
+          <div onMouseEnter={toggleMoreDropdown} onMouseLeave={toggleMoreDropdown} className="relative">
+
+            <button className="bg-white text-black py-2 px-4 rounded mr-4"><FaEllipsisV /></button>
+            {isMoreDropdownOpen && (
+              <Popup items={["Notification Preference", "24/7 Support", "Advertise", "Download App"]} />
+            )}
+
+          </div>
+
+        </div>
+
       </div>
     </nav>
   );

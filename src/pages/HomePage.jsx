@@ -1,56 +1,94 @@
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
-import FullWidthBanner from "../components/FullWidthBanner";
-import ImageBanner from "../components/ImageBanner";
+import CategoryBanner from "../components/Banner/CategoryBanner";
+import ProductCarousel from "../components/Banner/ProductCarousel";
+import AdvertCard from "../components/Card/AdvertCard";
+import AdCarousel from "../components/Banner/AdCarousel";
+import WrapperCarousel from "../components/Carousels/WrappedCarousel";
+import ProductCard from "../components/Card/ProductCard";
+
 
 
 const HomePage = () => {
+
+    const products = [
+        {
+            id: 1,
+            name: "Product 1",
+            price: 100,
+            image: "https://via.placeholder.com/300",
+        },
+        {
+            id: 2,
+            name: "Product 2",
+            price: 200,
+            image: "https://via.placeholder.com/300",
+        },
+        {
+            id: 4,
+            name: "Product 4",
+            price: 400,
+            image: "https://via.placeholder.com/300",
+        },
+        {
+            id: 5,
+            name: "Product 5",
+            price: 500,
+            image: "https://via.placeholder.com/300",
+        },
+        {
+            id: 3,
+            name: "Product 3",
+            price: 300,
+            image: "https://via.placeholder.com/300",
+        },
+        {
+            id: 4,
+            name: "Product 4",
+            price: 400,
+            image: "https://via.placeholder.com/300",
+        },
+        {
+            id: 5,
+            name: "Product 5",
+            price: 500,
+            image: "https://via.placeholder.com/300",
+        },
+    ];
     return (
         <>
-        <Navbar />
-        <FullWidthBanner
-            height={240}
-            image="https://via.placeholder.com/1920x500"
-        />
-        <FullWidthBanner
-            height={140}
-            image="https://via.placeholder.com/1920x500"
-        />
-        <FullWidthBanner
-            height={90}
-            image="https://via.placeholder.com/1920x500"
-        />
-        <FullWidthBanner
-            height={180}
-            image="https://via.placeholder.com/1920x500"
-        />
-        <ImageBanner
-            images={[
-                'https://via.placeholder.com/300x200',
-                'https://via.placeholder.com/300x200',
-                'https://via.placeholder.com/300x200',
-            ]}
-            height={240}
-        />
-        <FullWidthBanner
-            height={180}
-            image="https://via.placeholder.com/1920x500"
-        />
-        <FullWidthBanner
-            height={280}
-            image="https://via.placeholder.com/1920x500"
-        />
-        <ImageBanner
-            images={[
-                'https://via.placeholder.com/300x200',
-                'https://via.placeholder.com/300x200',
-                'https://via.placeholder.com/300x200',
-            ]}
-            height={240}
-        />
-        <Footer />
+            <Navbar />
+            <CategoryBanner />
+
+            <AdCarousel />
+            <div className="flex justify-start">
+
+                <ProductCarousel />
+
+                <AdvertCard image={"https://via.placeholder.com/300"} />
+            </div>
+
+            <WrapperCarousel text="Featured Products" images={products.map((product) => (
+                <ProductCard
+                    key={product.id}
+                    image={product.image}
+                    title={product.name}
+                    subtitle={`$${product.price}`}
+                />))} />
+
+            <WrapperCarousel text="Sports & Health Care" images={products.map((product) => (
+                <ProductCard
+                    key={product.id}
+                    image={product.image}
+                    title={product.name}
+                    subtitle={`$${product.price}`}
+                />))} />
+            
+
+
+            <Footer />
         </>
     );
-    };
+};
 
 export default HomePage;
