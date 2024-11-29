@@ -4,15 +4,15 @@ import ProductCard from "./ProductCard";
 
 const ProductCardGrid = ({ text, products }) => {
     return (
-        <div className="relative w-full bg-gray-100 rounded-lg shadow-md p-4">
+        <div className="relative w-full bg-white rounded-lg shadow-md p-3 my-3">
             {/* Top Left Text */}
-            <div className="absolute top-2 left-2 bg-blue-500 text-white text-lg font-semibold px-4 py-2 rounded-lg shadow">
+            <div className="absolute top-2 left-2 text-gray-800 text-lg font-semibold mx-4 px-4 py-2 z-50">
                 {text}
             </div>
 
             {/* Top Right Arrow */}
             <button
-                className="absolute top-2 right-2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600 focus:outline-none"
+                className="absolute top-2 right-2 z-50 bg-gray-800 text-white mx-4 p-2 rounded-full hover:bg-gray-600 focus:outline-none"
                 onClick={() => alert("Arrow clicked!")} // Replace with desired action
             >
                 <FaArrowRight size={20} />

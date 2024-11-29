@@ -1,6 +1,6 @@
 import PopupMenu from "../Navbar/Popup";
 import { useState } from "react";
-import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 const ProductCategories = () => {
     const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -24,7 +24,7 @@ const ProductCategories = () => {
     };
 
     return (
-        <div className="flex justify-evenly">
+        <div className="flex justify-evenly my-2 bg-white">
             {categories.map((category, index) => (
                 <div
                     className="w-1/2 md:w-1/4 lg:w-1/6 p-2 relative"
@@ -39,9 +39,9 @@ const ProductCategories = () => {
                         <div className="flex items-center">{category.title} {category.subCategories.length > 0 && (
                                 <div className="ml-2">
                                     {hoveredCategory === index || expandedCategory === index ? (
-                                        <FaArrowAltCircleUp />
+                                        <FaAngleUp />
                                     ) : (
-                                        <FaArrowAltCircleDown />
+                                        <FaAngleDown />
                                     )}
                                 </div>
                             )}</div>

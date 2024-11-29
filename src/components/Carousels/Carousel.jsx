@@ -10,7 +10,7 @@ const Carousel = ({ components }) => {
         const handleResize = () => {
             if (carouselRef.current) {
                 const carouselWidth = carouselRef.current.offsetWidth;
-                const itemWidth = 260;
+                const itemWidth = 240;
                 setVisibleCount(Math.floor(carouselWidth / itemWidth));
             }
         };
@@ -31,9 +31,9 @@ const Carousel = ({ components }) => {
     };
 
     return (
-        <div className="relative w-full min-h-[300px] overflow-hidden" ref={carouselRef}>
+        <div className="relative w-full min-h-[300px] overflow-hidden bg-white" ref={carouselRef}>
             <div
-                className="flex transition-transform duration-300 justify-between pl-6"
+                className="flex transition-transform duration-300 justify-evenly px-6"
                 style={{
                     transform: `translateX(-${(currentIndex * 100) / visibleCount}%)`,
                     width: `${(components.length * 100) / visibleCount}%`,

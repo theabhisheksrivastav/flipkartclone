@@ -88,7 +88,7 @@ const HomePage = () => {
             <CategoryBanner />
 
             <AdCarousel />
-            <div className="flex justify-start">
+            <div className="flex justify-start my-4">
 
                 <ProductCarousel />
 

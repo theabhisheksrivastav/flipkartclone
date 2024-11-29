@@ -12,7 +12,7 @@ function Navbar() {
     setIsMoreDropdownOpen(!isMoreDropdownOpen);
   };
   return (
-    <nav className="bg-white text-black p-4">
+    <nav className="bg-white text-black p-4 h-24 flex justify-around">
       <div className="container mx-auto flex justify-between items-center">
 
         <div className="flex items-center">
@@ -25,9 +25,9 @@ function Navbar() {
 
           <LoginDropdown />
 
-          <button className="flex items-center gap-2  text-2xl font-semibold  focus:outline-none bg-white text-black py-2 px-4 rounded"> <FaCartArrowDown /> Cart</button>
+          <button className="flex items-center gap-2  text-xl  focus:outline-none bg-white text-black py-2 px-4 rounded"> <FaCartArrowDown /> Cart</button>
 
-          <button className="flex items-center gap-2  text-2xl font-semibold  focus:outline-none bg-white text-black py-2 px-4 rounded mr-4"><FaStoreAlt /> Become a Seller</button>
+          <button className="flex items-center gap-2  text-xl  focus:outline-none bg-white text-black py-2 px-4 rounded mr-4"><FaStoreAlt /> Become a Seller</button>
 
           <div onMouseEnter={toggleMoreDropdown} onMouseLeave={toggleMoreDropdown} className="relative">
 

@@ -16,7 +16,7 @@ const LoginDropdown = () => {
             <button
                 // onClick=
                 // {() => window.location.href = '/login'}
-                className={`flex items-center gap-2 px-4 py-2 text-2xl font-semibold text-black rounded-xl focus:outline-none ${isOpen ? 'bg-blue-700 text-white' : ''}`}
+                className={`flex items-center gap-2 px-4 py-2 text-xl text-black rounded-xl focus:outline-none ${isOpen ? 'bg-blue-700 text-white' : ''}`}
             >
                 <FaRegUserCircle />
                 Login
