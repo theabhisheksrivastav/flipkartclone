@@ -36,7 +36,7 @@ const ProductCategories = () => {
                         <div className="">
                             <img src={category.image} alt={category.title} />
                         </div>
-                        <div className="flex items-center">{category.title} {category.subCategories.length > 0 && (
+                        <div className="flex items-center font-semibold">{category.title} {category.subCategories.length > 0 && (
                                 <div className="ml-2">
                                     {hoveredCategory === index || expandedCategory === index ? (
                                         <FaAngleUp />
