@@ -1,23 +1,26 @@
 import PopupMenu from "../Navbar/Popup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 const ProductCategories = () => {
     const [hoveredCategory, setHoveredCategory] = useState(null);
-
+    const [categories, setCategories] = useState([]);
     const [expandedCategory, setExpandedCategory] = useState(null);
 
-    const categories = [
-        { title: "Grocery", subCategories: [], image: "https://rukminim2.flixcart.com/flap/96/96/image/29327f40e9c4d26b.png?q=100" },
-        { title: "Electronics", subCategories: ["Computers", "Laptops", "Cameras", "Televisions", "Speakers"], image: "https://rukminim2.flixcart.com/flap/96/96/image/69c6589653afdb9a.png?q=100" },
-        { title: "Fashion", subCategories: ["Men's Clothing", "Women's Clothing", "Kid's Clothing", "Footwear", "Accessories"], image: "https://rukminim2.flixcart.com/fk-p-flap/96/96/image/0d75b34f7d8fbcb3.png?q=100" },
-        { title: "Beauty, Toys & More", subCategories: ["Beauty Products", "Toys", "Baby Care", "Sports", "Stationery"], image: "https://rukminim2.flixcart.com/flap/96/96/image/dff3f7adcf3a90c6.png?q=100" },
-        { title: "Mobiles", subCategories: [], image: "https://rukminim2.flixcart.com/flap/96/96/image/22fddf3c7da4c4f4.png?q=100" },
-        { title: "Home & Furniture", subCategories: [], image: "https://rukminim2.flixcart.com/flap/96/96/image/ab7e2b022a4587dd.jpg?q=100" },
-        { title: "Appliances", subCategories: ["Refrigerators", "Washing Machines", "Kitchen Appliances", "Air Conditioners", "Microwave Ovens"], image: "https://rukminim2.flixcart.com/fk-p-flap/96/96/image/0139228b2f7eb413.jpg?q=100" },
-        { title: "Two Wheelers", subCategories: ["Scooters", "Motorcycles", "Electric Vehicles", "Accessories", "Helmets"], image: "https://rukminim2.flixcart.com/fk-p-flap/96/96/image/05d708653beff580.png?q=100" },
-        { title: "Flight Booking", subCategories: [], image: "https://rukminim2.flixcart.com/flap/96/96/image/71050627a56b4693.png?q=100" },
-    ];
+    useEffect(() => {
+        const fetchCategory = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/categories');
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error('Error fetching ad images:', error);
+            }
+        };
+
+        fetchCategory();
+    }, []);
+    
 
     const handleCategoryHover = (index) => {
         setExpandedCategory(expandedCategory === index ? null : index);

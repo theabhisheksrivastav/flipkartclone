@@ -1,27 +1,23 @@
 import { FaTwitter, FaFacebook, FaYoutube } from "react-icons/fa";
+import { useState, useEffect } from "react";
 
 
 const RightSection = () => {
-    const rightFooterSection = {
-        "Mail Us": [
-          "Flipkart Internet Private Limited,",
-          "Buildings Alyssa, Begonia &",
-          "Clove Embassy Tech Village,",
-          "Outer Ring Road, Devarabeesanahalli Village,",
-          "Bengaluru, 560103,",
-          "Karnataka, India",
-        ],
-        "Registered Office Address": [
-          "Flipkart Internet Private Limited,",
-          "Buildings Alyssa, Begonia &",
-          "Clove Embassy Tech Village,",
-          "Outer Ring Road, Devarabeesanahalli Village,",
-          "Bengaluru, 560103,",
-          "Karnataka, India",
-          "CIN : U51109KA2012PTC066107",
-          "Telephone: 044-45614700 / 044-67415800",
-        ],
+    const [rightFooterSection, setRightFooterSection] = useState({});
+
+    useEffect(() => {
+      const fetchRightFooterSection = async () => {
+          try {
+              const response = await fetch('http://localhost:5000/api/footer/right');
+              const data = await response.json();
+              setRightFooterSection(data);
+          } catch (error) {
+              console.error('Error fetching ad images:', error);
+          }
       };
+
+      fetchRightFooterSection();
+  }, []);
       return (
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Section: Mail Us and Address */}
@@ -29,7 +25,7 @@ const RightSection = () => {
           <div key={section} className="space-y-2">
             <h3 className="font-semibold text-sm text-gray-400">{section}:</h3>
             <p className="text-gray-300 text-sm">
-              {rightFooterSection[section].map((line, index) => (
+              {Array.isArray(rightFooterSection[section]) && rightFooterSection[section].map((line, index) => (
                 <span key={index} className="block">
                   {line}
                 </span>

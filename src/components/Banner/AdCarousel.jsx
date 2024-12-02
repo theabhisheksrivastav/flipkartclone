@@ -1,17 +1,25 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const AdCarousel = () => {
-    const adImages = [
-        'https://via.placeholder.com/1920x600?text=Ad+1',
-        'https://via.placeholder.com/1920x600?text=Ad+2',
-        'https://via.placeholder.com/1920x600?text=Ad+3',
-        'https://via.placeholder.com/1920x600?text=Ad+4',
-        'https://via.placeholder.com/1920x600?text=Ad+5',
-    ];
-
     const [currentIndex, setCurrentIndex] = useState(0);
-    const visibleCount = 1; // Only show one image per slide
+    const [adImages, setAdImages] = useState([]);
+    const visibleCount = 1;
     const carouselRef = useRef(null);
+
+    useEffect(() => {
+        const fetchAdImages = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/ad-images');
+                if (!response.ok) throw new Error('Failed to fetch right footer section');
+                const data = await response.json();
+                setAdImages(data);
+            } catch (error) {
+                console.error('Error fetching ad images:', error);
+            }
+        };
+
+        fetchAdImages();
+    }, []);
 
     const prevSlide = () => {
         const maxIndex = Math.max(adImages.length - visibleCount, 0);

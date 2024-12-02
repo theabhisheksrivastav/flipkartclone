@@ -1,12 +1,23 @@
 import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
 const ImageBanner = ({ images = [], height = 200 }) => {
-    const defaultImages = [
-      'https://via.placeholder.com/300x200',
-      'https://via.placeholder.com/300x200',
-      'https://via.placeholder.com/300x200',
-    ];
+    const [defaultImages, setDefaultImages] = useState([]);
     const imagesToUse = images.length > 0 ? images : defaultImages.slice(0, 3);
+
+    useEffect(() => {
+      const fetchDefaultImages = async () => {
+          try {
+              const response = await fetch('http://localhost:5000/api/default-image');
+              const data = await response.json();
+              setDefaultImages(data);
+          } catch (error) {
+              console.error('Error fetching ad images:', error);
+          }
+      };
+
+      fetchDefaultImages();
+  }, []);
   
     return (
       <div style={{ height: `${height}px` }} className="flex">

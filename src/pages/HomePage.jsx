@@ -6,82 +6,31 @@ import AdvertCard from "../components/Card/AdvertCard";
 import AdCarousel from "../components/Banner/AdCarousel";
 import WrapperCarousel from "../components/Carousels/WrappedCarousel";
 import ProductCard from "../components/Card/ProductCard";
+import { useState, useEffect } from "react";
 import ProductCardGrid from "../components/Card/ProductCardGrid";
 
 
 
 const HomePage = () => {
+    const [products, setProducts] = useState([]);
+    const [products2, setProducts2] = useState([]);
 
-    const products = [
-        {
-            id: 1,
-            name: "Product 1",
-            price: 100,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 2,
-            name: "Product 2",
-            price: 200,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 4,
-            name: "Product 4",
-            price: 400,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 5,
-            name: "Product 5",
-            price: 500,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 3,
-            name: "Product 3",
-            price: 300,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 4,
-            name: "Product 4",
-            price: 400,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 5,
-            name: "Product 5",
-            price: 500,
-            image: "https://via.placeholder.com/300",
-        },
-    ];
-    const products2 = [
-        {
-            id: 1,
-            name: "Product 1",
-            price: 100,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 2,
-            name: "Product 2",
-            price: 200,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 4,
-            name: "Product 4",
-            price: 400,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 5,
-            name: "Product 5",
-            price: 500,
-            image: "https://via.placeholder.com/300",
-        }
-    ];
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/products');
+                const data = await response.json();
+                setProducts(data);
+                setProducts2(data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+  
+        fetchProducts();
+    }, []);
+    
     return (
         <>
             <Navbar />
@@ -97,10 +46,10 @@ const HomePage = () => {
 
             <WrapperCarousel text="Featured Products" images={products.map((product) => (
                 <ProductCard
-                    key={product.id}
-                    image={product.image}
-                    title={product.name}
-                    subtitle={`$${product.price}`}
+                    key={product?.id}
+                    image={product?.image}
+                    title={product?.name}
+                    subtitle={`$${product?.price}`}
                 />))} />
 
             <WrapperCarousel text="Sports & Health Care" images={products.map((product) => (
@@ -112,33 +61,28 @@ const HomePage = () => {
                 />))} />
             <div className="grid grid-cols-2 gap-4 p-6">
                 <ProductCardGrid text="Electronics" products={products2.map((product2) => ({
-                    key: product2.id,
-                    image: product2.image,
-                    title: product2.name,
-                    subtitle: `$${product2.price}`,
-                }))} />
+                    image: product2?.image,
+                    title: product2?.name,
+                    subtitle: `$${product2?.price}`,
+                }))} key="electronics" />
                 <ProductCardGrid text="Health" products={products2.map((product2) => ({
-                    key: product2.id,
                     image: product2.image,
                     title: product2.name,
                     subtitle: `$${product2.price}`,
-                }))} />
+                }))} key="health" />
             </div>
             <div className="grid grid-cols-2 gap-4 p-6">
                 <ProductCardGrid text="Books" products={products2.map((product2) => ({
-                    key: product2.id,
                     image: product2.image,
                     title: product2.name,
                     subtitle: `$${product2.price}`,
-                }))} />
+                }))} key="books" />
                 <ProductCardGrid text="Exercise" products={products2.map((product2) => ({
-                    key: product2.id,
                     image: product2.image,
                     title: product2.name,
                     subtitle: `$${product2.price}`,
-                }))} />
+                }))} key="exercise" />
             </div>
-
 
             <Footer />
         </>

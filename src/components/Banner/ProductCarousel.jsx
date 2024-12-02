@@ -1,51 +1,24 @@
 import ProductCard from "../Card/ProductCard";
 import Carousel from "../Carousels/Carousel";
+import { useState, useEffect } from "react";
 
 const ProductCarousel = () => {
-    const products = [
-        {
-            id: 1,
-            name: "Product 1",
-            price: 100,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 2,
-            name: "Product 2",
-            price: 200,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 4,
-            name: "Product 4",
-            price: 400,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 5,
-            name: "Product 5",
-            price: 500,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 3,
-            name: "Product 3",
-            price: 300,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 4,
-            name: "Product 4",
-            price: 400,
-            image: "https://via.placeholder.com/300",
-        },
-        {
-            id: 5,
-            name: "Product 5",
-            price: 500,
-            image: "https://via.placeholder.com/300",
-        },
-    ];
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/products');
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching ad images:', error);
+            }
+        };
+  
+        fetchProducts();
+    }, []);
+    
 
     return (
         <Carousel

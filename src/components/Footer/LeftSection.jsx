@@ -1,34 +1,22 @@
+import { useState, useEffect } from "react";
+
 const LeftSection = () => {
-    const leftFooterSection = {
-        "ABOUT": [
-            "Contact Us",
-            "About Us",
-            "Careers",
-            "Flipkart Stories",
-            "Press",
-            "Corporate Information"
-        ],
-        "GROUP COMPANIES": [
-            "Myntra",
-            "Cleartrip",
-            "Shopsy"
-        ],
-        "HELP": [
-            "Payments",
-            "Shipping",
-            "Cancellation & Returns",
-            "FAQ"
-        ],
-        "CONSUMER POLICY": [
-            "Cancellation & Returns",
-            "Terms Of Use",
-            "Security",
-            "Privacy",
-            "Sitemap",
-            "Grievance Redressal",
-            "EPR Compliance"
-        ]
-    };
+    const [leftFooterSection, setLeftFooterSection] = useState({});
+
+    useEffect(() => {
+        const fetchLeftFooterSection = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/footer/left');
+                const data = await response.json();
+                setLeftFooterSection(data);
+            } catch (error) {
+                console.error('Error fetching ad images:', error);
+            }
+        };
+
+        fetchLeftFooterSection();
+    }, []);
+
     return (
         < div className = "container mx-auto grid grid-cols-1 md:grid-cols-4 gap-4" >
         {
