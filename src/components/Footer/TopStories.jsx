@@ -17,9 +17,7 @@ const TopStories = () => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch top stories');
                 }
-                console.log(response);
                 const data = await response.json();
-                console.log(data);
                 setTopStoriesData(data);
             } catch (error) {
                 setError('Error fetching top stories: ' + error.message);

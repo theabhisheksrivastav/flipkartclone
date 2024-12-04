@@ -11,6 +11,7 @@ const ProductCarousel = () => {
                 const response = await fetch('http://localhost:5000/api/products');
                 const data = await response.json();
                 setProducts(data);
+                console.log(data);
             } catch (error) {
                 console.error('Error fetching ad images:', error);
             }
@@ -24,8 +25,8 @@ const ProductCarousel = () => {
         <Carousel
             components={products.map((product) => (
                 <ProductCard
-                    key={product.id}
-                    image={product.image}
+                    key={product.image}
+                    image={product.imageLink}
                     title={product.name}
                     subtitle={`$${product.price}`}
                 />

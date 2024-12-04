@@ -46,39 +46,39 @@ const HomePage = () => {
 
             <WrapperCarousel text="Featured Products" images={products.map((product) => (
                 <ProductCard
-                    key={product?.id}
-                    image={product?.image}
+                    key={product?.image}
+                    image={product?.imageLink}
                     title={product?.name}
                     subtitle={`$${product?.price}`}
                 />))} />
 
             <WrapperCarousel text="Sports & Health Care" images={products.map((product) => (
                 <ProductCard
-                    key={product.id}
-                    image={product.image}
+                key={product?.image}
+                image={product?.imageLink}
                     title={product.name}
                     subtitle={`$${product.price}`}
                 />))} />
             <div className="grid grid-cols-2 gap-4 p-6">
                 <ProductCardGrid text="Electronics" products={products2.map((product2) => ({
-                    image: product2?.image,
+                    image: product2?.imageLink,
                     title: product2?.name,
                     subtitle: `$${product2?.price}`,
                 }))} key="electronics" />
                 <ProductCardGrid text="Health" products={products2.map((product2) => ({
-                    image: product2.image,
+                    image: product2.imageLink,
                     title: product2.name,
                     subtitle: `$${product2.price}`,
                 }))} key="health" />
             </div>
             <div className="grid grid-cols-2 gap-4 p-6">
                 <ProductCardGrid text="Books" products={products2.map((product2) => ({
-                    image: product2.image,
+                    image: product2.imageLink,
                     title: product2.name,
                     subtitle: `$${product2.price}`,
                 }))} key="books" />
                 <ProductCardGrid text="Exercise" products={products2.map((product2) => ({
-                    image: product2.image,
+                    image: product2.imageLink,
                     title: product2.name,
                     subtitle: `$${product2.price}`,
                 }))} key="exercise" />

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const Admin = () => {
     const [products, setProducts] = useState([]);
     const [isEditMode, setIsEditMode] = useState(false);
-    const [formData, setFormData] = useState({ name: '', price: '', image: '' });
+    const [formData, setFormData] = useState({ name: '', price: '', image: null });
     const [editingProductId, setEditingProductId] = useState(null);
 
     // Fetch products on component mount
@@ -22,8 +22,13 @@ const Admin = () => {
 
     // Handle input change in the form
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const { name, value, type, files } = e.target;
+
+        if (type === 'file') {
+            setFormData({ ...formData, [name]: files[0] }); // Set file as form data
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     // Handle form submission for creating or updating products
@@ -35,14 +40,16 @@ const Admin = () => {
         }
 
         try {
+            const dataToSend = new FormData();
+            dataToSend.append('name', formData.name);
+            dataToSend.append('price', formData.price);
+            dataToSend.append('image', formData.image); // Append the image file
+
             if (isEditMode) {
                 // Update product
                 await fetch(`http://localhost:5000/api/products/${editingProductId}`, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
+                    body: dataToSend, // Send FormData as body
                 });
                 setProducts(products.map(product =>
                     product._id === editingProductId ? { ...product, ...formData } : product
@@ -51,17 +58,14 @@ const Admin = () => {
                 // Create new product
                 const response = await fetch('http://localhost:5000/api/products', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
+                    body: dataToSend, // Send FormData as body
                 });
                 const newProduct = await response.json();
                 setProducts(prevProducts => [...prevProducts, newProduct]);
             }
 
             // Reset form
-            setFormData({ name: '', price: '', image: '' });
+            setFormData({ name: '', price: '', image: null });
             setIsEditMode(false);
             setEditingProductId(null);
         } catch (error) {
@@ -125,11 +129,10 @@ const Admin = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Image URL</label>
+                    <label className="block text-gray-700">Image</label>
                     <input
-                        type="url"
+                        type="file"
                         name="image"
-                        value={formData.image}
                         onChange={handleInputChange}
                         className="w-full border rounded p-2"
                         required
@@ -147,7 +150,7 @@ const Admin = () => {
                             type="button"
                             onClick={() => {
                                 setIsEditMode(false);
-                                setFormData({ name: '', price: '', image: '' });
+                                setFormData({ name: '', price: '', image: null });
                                 setEditingProductId(null);
                             }}
                             className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
@@ -172,12 +175,12 @@ const Admin = () => {
                     </thead>
                     <tbody>
                         {products.map((product) => (
-                            <tr key={product._id} className="border-b hover:bg-gray-100">
+                            <tr key={product.image} className="border-b hover:bg-gray-100">
                                 <td className="py-3 px-4">{product._id}</td>
                                 <td className="py-3 px-4">{product.name}</td>
                                 <td className="py-3 px-4">{product.price}</td>
                                 <td className="py-3 px-4">
-                                    <img src={product.image} alt={product.name} className="h-10 w-10 rounded" />
+                                    <img src={product.imageLink} alt={product.name} className="h-10 w-10 rounded" />
                                 </td>
                                 <td className="py-3 px-4 flex space-x-2">
                                     <button
